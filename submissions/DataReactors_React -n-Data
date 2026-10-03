@@ -1,0 +1,347 @@
+# Project Name
+
+**React n Data: AI-Scored Data Marketplace**
+
+## Team / attendee
+
+* Team name (if applicable): React-n-data
+
+* Members and GitHub usernames:
+  jeevan palle-pallejeevan24
+  Mahipal - mahipalbaithi
+  Jayaram - Jayaram002
+
+* Profile links (optional):
+  Jeevan: [https://github.com/pallejeevan24](https://github.com/pallejeevan24)
+  Mahipal: [https://github.com/mahipalbaithi](https://github.com/mahipalbaithi)
+  Jayaram: [https://github.com/Jayaram002](https://github.com/Jayaram002)
+
+## Challenge
+
+Select the challenge you are entering:
+
+* [ ] Best Open-Source AI Project
+* [✓] Best Use of Gemma 4
+* [ ] Build on elah
+
+If listing multiple categories, confirm eligibility with the organizers and complete evidence for each.
+
+## Project links
+
+* Public GitHub repository: [https://github.com/Jayaram002/React-n-data.git](https://github.com/Jayaram002/React-n-data.git)
+* Open-source license (link to the license file): MIT
+
+## Problem and solution
+
+Who is this for? What problem does it solve? Describe the main input → output workflow.
+
+**React n Data** is an AI-powered, two-sided data marketplace designed for **data contributors and agency/enterprise buyers**.
+
+Contributors can upload image and tabular datasets and make them available for licensed access. Buyers can discover, evaluate, and purchase datasets through a structured marketplace.
+
+The main problem is that buyers often have difficulty determining the **quality, authenticity, uniqueness, metadata accuracy, and commercial value** of datasets before purchasing them.
+
+React n Data addresses this by combining **Gemma AI evaluation with rule-based validation** to create a multi-dimensional **Trust Score from 0–100**. The platform also provides dynamic pricing recommendations based on the Trust Score and demand.
+
+### Main input → output workflow
+
+**Contributor uploads image or tabular dataset**
+
+→ Consent and metadata validation
+
+→ Quality, privacy, schema, and duplicate checks
+
+→ Gemma AI classification and evaluation
+
+→ **0–100 Trust Score**
+
+→ Dynamic pricing recommendation
+
+→ Dataset published to marketplace
+
+→ Agency searches, filters, and previews datasets
+
+→ Mock checkout
+
+→ Commercial license generation
+
+→ Licensed dataset access/download
+
+→ **80% contributor / 20% platform revenue split**
+
+→ Contributor earnings move through a dispute-protected payout workflow.
+
+The repository specifically describes support for both **image and tabular datasets**.
+
+## Approach and technologies
+
+The project uses a modular full-stack architecture designed to separate the user interface, API, AI evaluation, marketplace, storage, and financial components.
+
+### Frontend
+
+* React 18
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Router
+* Axios
+
+The frontend includes dedicated views for the Marketplace, Upload workflow, Earnings, Administration, and Mock Checkout.
+
+### Backend
+
+* Python
+* FastAPI
+* Pydantic
+* SQLAlchemy
+* Alembic
+* JWT Authentication
+* Role-Based Access Control
+
+The backend separates REST API endpoints, security/core functionality, database models, validation schemas, and application services.
+
+### Database and storage
+
+* PostgreSQL
+* SQLite
+* MinIO / S3-compatible object storage
+* Docker
+* Docker Compose
+
+The repository provides Docker Compose infrastructure for PostgreSQL and MinIO.
+
+### AI and data evaluation
+
+* Gemma AI
+* Rule-based validation
+* pHash / dHash perceptual hashing
+* Metadata and schema analysis
+* PII detection and masking
+* Safe preview generation
+
+The project implements a five-dimensional Trust Score:
+
+* **Quality:** 35%
+* **Authenticity:** 20%
+* **Uniqueness:** 15%
+* **Metadata Accuracy:** 15%
+* **Contributor Reputation:** 15%
+
+The documented formula is:
+
+**Trust Score = 0.35Q + 0.20A + 0.15U + 0.15M + 0.15R**
+
+These factors combine automated data-quality checks, authenticity signals, uniqueness analysis, metadata alignment, and contributor history.
+
+### AI confidence routing
+
+Gemma classification uses confidence-based routing:
+
+* **≥ 0.75:** Automatically assigned
+* **0.50–0.75:** Flagged for review
+* **< 0.50:** Held uncategorized
+
+This provides a human-review path for lower-confidence classifications.
+
+### Dynamic pricing
+
+The platform calculates suggested commercial pricing using:
+
+**Suggested Price = Base Price × Trust Score Factor × Demand Multiplier**
+
+Contributor pricing is bounded between:
+
+**0.80 × Suggested Price** and **1.30 × Suggested Price**.
+
+### Financial system
+
+The platform includes:
+
+* Mock checkout
+* 80/20 revenue sharing
+* Double-entry bookkeeping
+* Contributor escrow
+* Dispute window
+* Wallet balances
+* Payout requests
+* Audit trails
+
+For a $100 dataset purchase, the documented ledger records:
+
+**$100 Buyer Payment → $80 Contributor Escrow + $20 Platform Revenue**
+
+The ledger maintains the accounting invariant that total debits equal total credits.
+
+### Why these technologies?
+
+The architecture combines a modern TypeScript frontend with a Python/FastAPI backend so that marketplace functionality and AI/data-processing services remain modular.
+
+PostgreSQL and SQLAlchemy provide structured persistence, MinIO/S3 provides object-storage compatibility, Docker provides reproducible infrastructure, and Pytest provides automated verification.
+
+### Reused libraries, datasets, starter code, and AI-assisted development
+
+The project uses established open-source technologies and libraries including React, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Tailwind CSS, Pytest, Docker, and MinIO.
+
+The repository also includes seeded marketplace data for **27 multi-domain datasets across 11 taxonomy domains**.
+
+**AI-assisted development:** Specific AI coding assistants or the extent of AI-assisted development are not documented in the repository README. These should be added only if the team used such tools and can accurately identify them.
+
+## Challenge evidence
+
+Complete the relevant section(s) and remove those that do not apply.
+
+### Best Open-Source AI Project
+
+* Open-source/open-weight AI component and its role:
+
+**Gemma AI** is used in the project's AI Trust Engine for dataset classification and evaluation. The AI output contributes to the platform's multi-dimensional Trust Score and marketplace categorization, while deterministic rule-based checks provide additional validation.
+
+* Code link showing the integration:
+
+[https://github.com/Jayaram002/React-n-data](https://github.com/Jayaram002/React-n-data)
+
+Relevant backend service area:
+
+`backend/app/services/`
+
+The repository identifies this service layer as containing core services including **Gemma AI, Storage, Ledger, Pricing, and Hashing**.
+
+* Agent Skill Open Standard compliance (if applicable):
+
+**Not documented / not claimed.**
+
+* Original harness implementation or meaningful changes (if applicable):
+
+The project builds a complete marketplace application around the AI component rather than using the model as an isolated feature.
+
+The implementation connects AI evaluation with:
+
+* Dataset ingestion
+* Trust Scoring
+* Dynamic pricing
+* Marketplace discovery
+* Safe previews
+* Licensing
+* Financial ledger
+* Contributor payouts
+* Admin moderation
+* Revenue analytics
+* Audit logging
+* End-to-end testing
+
+The repository describes this as an eight-phase implementation covering the marketplace lifecycle.
+
+### Best Use of Gemma 4
+
+* Gemma 4 model identifier and Gemini API integration:
+
+**The repository documents Gemma AI, including a “Gemma AI (Live / Mock)” component, but does not specify an exact Gemma 4 model identifier or Gemini API integration. This information should be added from the actual implementation/configuration before final submission.**
+
+* Code link showing the integration:
+
+[https://github.com/Jayaram002/React-n-data](https://github.com/Jayaram002/React-n-data)
+
+Relevant backend area:
+
+`backend/app/services/`
+
+The repository architecture identifies the services layer as containing the Gemma AI functionality.
+
+* Input and useful output; multimodal value where applicable:
+
+**Input:** Uploaded image and tabular datasets, together with associated metadata and dataset information.
+
+**Useful output:** Gemma AI classification contributes to dataset categorization and the Trust Score pipeline. The resulting evaluation is combined with rule-based checks to assess quality, authenticity, uniqueness, metadata accuracy, and contributor reputation.
+
+**Multimodal value:** The repository documents support for both image and tabular datasets. However, the exact Gemma 4 multimodal model/input configuration is not specified in the README and should be verified from the implementation before submission.
+
+### Build on elah
+
+* Editing workflow / idea direction and elah version:
+
+**Not applicable / not implemented.**
+
+* Model/runtime and structured-edit implementation:
+
+**Not applicable / not implemented.**
+
+* Validation/correction metrics, caption/frame checks, or keep/discard/replay evidence for your option:
+
+**Not applicable / not implemented.**
+
+## Current status
+
+* What works:
+
+The documented MVP includes:
+
+* Contributor onboarding
+* JWT authentication
+* Role-Based Access Control
+* Image and tabular dataset ingestion
+* Consent and license declarations
+* Duplicate detection
+* PII masking
+* Metadata and schema validation
+* Gemma AI classification
+* 0–100 Trust Scoring
+* Dynamic pricing
+* Marketplace search and filtering
+* Multi-domain dataset discovery
+* Safe dataset previews
+* Mock checkout
+* Commercial licensing
+* 80/20 double-entry financial ledger
+* Contributor wallet
+* Dispute-protected payouts
+* Admin moderation
+* Taxonomy management
+* Revenue analytics
+* Audit logging
+* Automated testing
+* End-to-end marketplace lifecycle
+
+The repository documents **32 comprehensive tests** covering authentication, ingestion, AI scoring, marketplace functionality, checkout, ledger operations, payouts, administration, and the complete marketplace lifecycle.
+
+* Known limitations / incomplete features:
+
+The current project is documented as an MVP/reference architecture.
+
+Known limitations include:
+
+* Payment processing uses a **mock checkout sandbox** rather than a live payment gateway.
+
+* Storage supports local/MinIO infrastructure rather than requiring a production cloud deployment.
+
+* Production payment-provider integration is not included.
+
+* The exact **Gemma 4 model identifier and Gemini API integration** are not documented in the repository README.
+
+* elah-specific functionality is not part of the documented implementation.
+
+* What you would improve next:
+
+* Integrate a production payment gateway.
+
+* Deploy scalable cloud object storage.
+
+* Add advanced fraud and data-provenance detection.
+
+* Expand AI-based quality and authenticity evaluation.
+
+* Add enterprise APIs and integrations.
+
+* Introduce advanced dataset recommendation capabilities.
+
+* Add automated copyright and provenance verification.
+
+* Scale the AI evaluation pipeline for larger datasets.
+
+## Submission checklist
+
+* [x] Project repository is public and links work.
+* [x] Required challenge evidence is included.
+* [x] Project uses an open-source license where required by the challenge.
+* [x] Work and reused materials are represented honestly.
+* [x] No API keys, tokens, passwords, or private data are included.
+* [x] I followed the organizers' build window and submission instructions.
